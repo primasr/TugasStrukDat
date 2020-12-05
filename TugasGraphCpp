@@ -1,0 +1,186 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+#define COUNT 15
+
+struct node  {
+int data;
+struct node *left;
+struct node *right;
+struct node *mid;
+};
+
+struct node* newNode(int data) {
+
+  struct node* node = new struct node();
+  node->data = data;
+  node->left = NULL;
+  node->right = NULL;
+  node->mid = NULL;
+
+return(node);
+}
+char nama[15][30] = {"Bundaran_ITS         ","Graha_ITS            ","Science_Technopark   ",
+                     "Manarul_Ilmi         ","Rektorat             ","SCC_ITS              ",
+                     "Bundaran_Tek_Elektro ","PDR_Kapal_Nasional   ","Research_Center      ",
+                     "Perumdos_Blok_U      ","Medical_Center       ","GR_Ballroom          "};
+
+
+void print2DUtil(struct node* root, int space)
+{
+    // Base case
+    if (root == NULL)
+        return;
+
+    // Increase distance between levels
+    space += COUNT;
+
+    // Process right child first
+    print2DUtil(root->right, space);
+
+    // Print current node after space
+    // count
+    cout<<endl;
+    for (int i = COUNT; i < space; i++)
+        cout<<" ";
+
+    if(root->data == 69) cout << "\n";
+    cout << nama[root->data] << "\n";
+
+    // Process mid child
+    print2DUtil(root->mid, space);
+
+    // Process left child
+    print2DUtil(root->left, space);
+}
+
+void gambarGaris(int v)
+{
+    for (int i= 0 ; i< v; i++)
+    {
+        cout << "=";
+    }
+    cout << endl;
+}
+
+class graph
+{
+private:
+    int v;
+    list <int>* adj;
+
+public:
+
+    //constructor
+    graph(int V)
+    {
+        this->v = V;
+        adj = new list <int>[V];
+
+    }
+
+    void UndirectEdge(int u, int v)
+    {
+        adj[u].push_back(v);
+        adj[v].push_back(u);
+    }
+    void DirectEdge(int u, int v)
+    {
+        adj[u].push_back(v);
+    }
+
+    void tampilkan_nama(int V)
+    {
+        for(int v = 0; v < V; v++)
+        {
+            printf("%s",nama[v]);
+            for (auto i = adj[v].begin(); i != adj[v].end(); ++i)
+            {
+                printf(" -> %s", nama[*i]);
+            }
+            printf("\n");
+        }
+    }
+
+    void tampilkan_angka(int V)
+    {
+        for(int v = 0; v < V; v++)
+        {
+            printf("%d",v);
+            for (auto i = adj[v].begin(); i != adj[v].end(); ++i)
+            {
+                printf(" -> %d", *i);
+            }
+            printf("\n");
+        }
+    };
+};
+
+int main ()
+{
+
+    graph g(12);
+
+    g.UndirectEdge(0,1);
+    g.DirectEdge(0,4); //direct
+    g.DirectEdge(3,0); //direct
+    g.UndirectEdge(11,0);
+
+    g.UndirectEdge(1,2);
+    g.UndirectEdge(2,7);
+    g.UndirectEdge(7,8);
+    g.UndirectEdge(8,9);
+    g.UndirectEdge(9,6);
+    g.UndirectEdge(6,10);
+    g.UndirectEdge(10,11);
+
+    g.DirectEdge(4,5); //direct
+    g.DirectEdge(5,3); //direct
+    g.UndirectEdge(5,6);
+
+    gambarGaris(100);
+    cout << "\n\t# DISPLAY WITH NODE NUMBER #\n\n";
+    gambarGaris(100);
+    g.tampilkan_angka(12);
+
+    gambarGaris(100);
+    cout << "\n\t# DISPLAY WITH NODE NAME #\n\n";
+    gambarGaris(100);
+    g.tampilkan_nama(12);
+
+    struct node *rootNode = newNode(0);
+    rootNode->left = newNode(11);
+    rootNode->mid = newNode(69);
+    rootNode->right = newNode(1);
+
+    rootNode->left->left  = newNode(69);
+    rootNode->left->left->left  = newNode(10);
+    rootNode->left->left->right  = newNode(6);
+    rootNode->mid->left = newNode(3);
+    rootNode->mid->right = newNode(4);
+    rootNode->right->right = newNode(2);
+
+    rootNode->mid->left->right = newNode(5);
+    rootNode->mid->right->right = newNode(69);
+    rootNode->right->right->left = newNode(69);
+
+    rootNode->mid->right->right->left = newNode(8);
+    rootNode->right->right->left->left = newNode(7);
+
+    rootNode->mid->right->right->left->left = newNode(69);
+
+    rootNode->mid->right->right->left->left->left = newNode(9);
+
+
+    gambarGaris(100);
+    cout << "\n\t# DISPLAY WITH MAP #\n\n";
+    gambarGaris(100);
+    print2DUtil(rootNode,0);
+
+    printf("\n\n\n");
+    gambarGaris(100);
+    printf("END OF PROGRAM\n");
+    gambarGaris(100);
+
+    return 0;
+}
