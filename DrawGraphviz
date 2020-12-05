@@ -1,0 +1,39 @@
+digraph {
+    graph [pad="0.055,0.055" bgcolor=lightgray]
+    node [style=filled]
+    
+    // VERTICES
+    
+    Bundaran_ITS [fillcolor="#045371" fontcolor="white" pos="-5,3!"]
+    Graha_ITS [fillcolor="#74145a" fontcolor="white" pos="-3,7!"]
+    Science_Technopark [fillcolor="#a27428" fontcolor="white" pos="1,8!"]
+    Manarul_Ilmi [fillcolor="#079806" fontcolor="white" pos="-2,-1!"]
+    Rektorat [shape=box fillcolor="#51a05a" fontcolor="white" pos="0,0!"]
+    SCC_ITS [fillcolor="#b1b242" fontcolor="white" pos="-1,-2!"] 
+    Bundaran_Teknik_Elektro [fillcolor="#c91f49" fontcolor="white" pos="-1,-6!"]
+    PDR_Kapal_Nasional [fillcolor="#1705b8" fontcolor="white" pos="5,4!"]
+    Research_Center_ITS [fillcolor="#045371" fontcolor="white" pos="4,1!"]
+    Perumdos_Blok_U [fillcolor="#ec43a3" fontcolor="white" pos="7,-2!"]
+    Medical_Center_ITS [fillcolor="#455b88" fontcolor="white" pos="-2,-11!"]
+    Grand_Royal_Ballroom [fillcolor="#2460eb" fontcolor="white" pos="-8,-9!"]
+    
+    // EDGES
+    
+    Bundaran_ITS -> Graha_ITS[label="Jl_Raya_ITS", dir="none"];
+    Bundaran_ITS -> Rektorat[label="Jl_Taman_Alumni"];
+    Manarul_Ilmi -> Bundaran_ITS[label="Jl_Taman_Alumni"];
+    Grand_Royal_Ballroom -> Bundaran_ITS[label="Jl_Unknown", dir="none"];
+    
+    Graha_ITS -> Science_Technopark[label="Jl_Raya_ITS", dir="none"];
+    Science_Technopark -> PDR_Kapal_Nasional[label="Jl_Teknik_Kimia", dir="none"];
+    PDR_Kapal_Nasional -> Research_Center_ITS[label="Jl_Teknik_Kimia", dir="none"];
+    Research_Center_ITS -> Perumdos_Blok_U[label="Jl_Teknik_Kimia", dir="none"];
+    Perumdos_Blok_U -> Bundaran_Teknik_Elektro[label="Jl_Teknik_Perkapalan", dir="none"];
+    Bundaran_Teknik_Elektro -> Medical_Center_ITS[label="Jl_Teknik_Elektro", dir="none"];
+    Medical_Center_ITS -> Grand_Royal_Ballroom[label="Jl_Keputih", dir="none"];
+
+    Rektorat -> SCC_ITS[label="Jl_Taman_Teknologi"];
+    SCC_ITS -> Manarul_Ilmi[label="Jl_Teknik_Mesin"];
+    SCC_ITS -> Bundaran_Teknik_Elektro[label="Jl_Teknik_Mesin", dir="none"];
+
+ }
